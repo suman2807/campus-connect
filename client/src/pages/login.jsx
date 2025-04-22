@@ -10,6 +10,14 @@ import logo from "../../public/logo.png"; // Replace with your university logo U
 // Hardcoded list of admin emails
 const adminEmails = ["daksh_vashishtha@srmap.edu.in", "admin2@srmap.edu.in"];
 
+/**
+ * A React component that handles user login for both students and admins.
+ *
+ * This component checks if the authenticated user is an admin. If not,
+ * it redirects them to the home page. For admins, it navigates them to the admin dashboard.
+ *
+ * @returns {JSX.Element} The JSX representing the Login form with student and admin login options.
+ */
 function Login() {
   const navigate = useNavigate();
 
@@ -25,6 +33,18 @@ function Login() {
     return () => unsubscribe();
   }, [navigate]);
 
+  /**
+   * Handles the sign-in process using a popup provider.
+   *
+   * This function attempts to log in the user using a specified authentication provider.
+   * If the user's email ends with "@srmap.edu.in", they are redirected to the home page.
+   * Otherwise, an alert is shown prompting them to use their university email for login,
+   * and the user is signed out.
+   *
+   * @async
+   * @function handleSignIn
+   * @throws {Error} If there's an error during the sign-in process.
+   */
   const handleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
@@ -40,6 +60,16 @@ function Login() {
     }
   };
 
+  /**
+   * Handles the login process for administrative users.
+   *
+   * This function attempts to log in an user using a popup authentication method provided by Firebase Authentication.
+   * If the logged-in user's email is included in the list of admin emails, the user is redirected to the admin dashboard.
+   * Otherwise, the function alerts that access is denied and signs out the user.
+   *
+   * @async
+   * @returns {void}
+   */
   const handleAdminLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
