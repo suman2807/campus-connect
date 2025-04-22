@@ -13,6 +13,13 @@ import AdminLogs from "../admin/logs";
 import Chat from "./chats";
 
 
+/**
+ * The main React component that renders all the routes of the application.
+ * @returns {JSX.Element} - A JSX element representing the routes configuration.
+ *
+ * @example
+ * const app = <App />;
+ */
 function App() {
   return (
     <Routes>

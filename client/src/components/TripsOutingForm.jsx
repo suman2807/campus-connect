@@ -2,6 +2,10 @@ import { useState } from "react";
 import { db } from "../firebase"; // Adjust path if needed
 import { collection, addDoc } from "firebase/firestore";
 
+/**
+ * React component that renders a form for creating trip/outing requests.
+ * @param {function} closeForm - Function to close the form after submission or cancellation.
+ */
 const TripsOutingForm = ({ closeForm }) => {
   const [formData, setFormData] = useState({
     title: "",
@@ -11,11 +15,31 @@ const TripsOutingForm = ({ closeForm }) => {
     participants: "",
   });
 
+  /**
+   * Handles input change events by updating the formData state.
+   *
+   * @param {Event} e - The event object from the input change event.
+   */
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * Handles the submission of a trip request form.
+   *
+   * @async
+   * @function handleSubmit
+   * @param {Event} e - The event object representing the form submission.
+   * @returns {Promise<void>}
+   *
+   * @throws {Error} If there is an error adding the trip request to Firestore.
+   *
+   * Example usage:
+   * ```javascript
+   * document.getElementById('tripForm').addEventListener('submit', handleSubmit);
+   * ```
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

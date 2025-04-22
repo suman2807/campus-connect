@@ -5,6 +5,13 @@ import { collection, getDocs, doc, deleteDoc, query, orderBy, addDoc } from "fir
 import { useNavigate, Link } from "react-router-dom";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 
+/**
+ * Represents the admin dashboard component.
+ * This component handles the management of requests by admins.
+ *
+ * @function
+ * @returns {JSX.Element} - Returns the JSX for rendering the admin dashboard.
+ */
 const Admin = () => {
   const [user, setUser] = useState(null);
   const [requests, setRequests] = useState([]);
@@ -40,6 +47,15 @@ const Admin = () => {
     }
   };
 
+  /**
+   * Logs a deletion event to the database.
+   *
+   * @async
+   * @function logDeletion
+   * @param {Object} request - The request object containing details about the item being deleted.
+   * @param {string} reason - The reason for the deletion.
+   * @throws Will throw an error if there is a problem logging the deletion to the database.
+   */
   const logDeletion = async (request, reason) => {
     try {
       await addDoc(collection(db, "logs"), {
@@ -54,6 +70,14 @@ const Admin = () => {
     }
   };
 
+  /**
+   * Handles the deletion of a request by prompting the user for a reason and updating the state.
+   *
+   * @async
+   * @param {string} id - The ID of the request to delete.
+   * @param {string} title - The title of the request to be deleted.
+   * @throws {Error} If an error occurs during the deletion process.
+   */
   const handleDelete = async (id, title) => {
     const reason = window.prompt(`Are you sure you want to delete the request: ${title}? Please provide a reason for deletion:`);
     if (reason) {
@@ -69,6 +93,14 @@ const Admin = () => {
     }
   };
 
+  /**
+   * Renders the details of a request dynamically.
+   *
+   * @param {Object} request - The request object containing the necessary details.
+   * @param {string} request.description - A description of the request.
+   * @param {number} request.createdAt.seconds - The timestamp in seconds when the request was created.
+   * @return {JSX.Element} - A JSX element representing the rendered request details.
+   */
   const renderRequestDetails = (request) => {
     // Render request details dynamically
     return (

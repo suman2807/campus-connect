@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 
+/**
+ * React component that renders the "About" page of the Campus Connect application.
+ *
+ * @function
+ * @returns {JSX.Element} - The rendered JSX for the "About" page.
+ */
 const About = () => {
   const navigate = useNavigate();
 

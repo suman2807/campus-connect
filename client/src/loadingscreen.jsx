@@ -7,6 +7,14 @@ import Navbar from "./components/navbar.jsx";
 import logo from "../public/logo.png";
 import { BrowserRouter as Router } from "react-router-dom";
 
+/**
+ * Represents the loading screen component for the SRRMAP Campus Connect application.
+ *
+ * This component displays a text that gradually reveals each character from the string "SRRMAP Campus Connect...".
+ * It includes an image of the university logo and applies styling to ensure the text is visually appealing.
+ *
+ * @returns {JSX.Element} - The JSX element representing the loading screen.
+ */
 const LoadingScreen = () => {
   const text = "SRRMAP Campus Connect...";
   const [visibleText, setVisibleText] = useState("");
@@ -41,6 +49,11 @@ const LoadingScreen = () => {
   );
 };
 
+/**
+ * The main application component that renders either a loading screen or the full app layout based on its state.
+ *
+ * @returns {JSX.Element} - The JSX element representing the current state of the application (loading or fully loaded).
+ */
 const MainApp = () => {
   const [loading, setLoading] = useState(true);
 

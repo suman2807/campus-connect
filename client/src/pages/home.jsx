@@ -62,6 +62,11 @@ const Home = () => {
     return () => unsubscribe();
   }, []);
 
+  /**
+   * Handles the click event of a button by setting the selected request label and making the sidebar visible.
+   *
+   * @param {string} label - The label associated with the clicked button, representing the selected request.
+   */
   const handleButtonClick = (label) => {
     setSelectedRequest(label);
     setSidebarVisible(true);
@@ -100,15 +105,33 @@ const Home = () => {
     });
   };
 
+  /**
+   * Handles changes in form input fields.
+   *
+   * This function is typically called when an input field's value changes. It updates the state of the form data accordingly.
+   *
+   * @param {Event} e - The event object containing information about the input change, usually passed directly from an input element's onChange handler.
+   */
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  /**
+   * Handles the change event of a file input element to update the form data with the selected file.
+   *
+   * @param {Event} e - The file input change event object.
+   */
   const handleFileChange = (e) => {
     setFormData((prevData) => ({ ...prevData, photo: e.target.files[0] }));
   };
 
+  /**
+   * Handles form submission for creating a new request.
+   * @async
+   * @function
+   * @param {Event} e - The form submission event.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newRequest = {
@@ -177,6 +200,17 @@ const Home = () => {
     }
   };
 
+  /**
+   * Handles the application process for a request.
+   *
+   * This function is responsible for applying a user to a specific request,
+   * checking if the user limit has been reached, and updating both the database
+   * and the local state with the new applicant information.
+   *
+   * @param {string} requestId - The unique identifier of the request.
+   * @param {number} userLimit - The maximum number of applicants allowed for the request.
+   * @param {Array<{ userId: string, name: string, skills: string }>} [applicants] - The current list of applicants for the request.
+   */
   const handleApply = async (requestId, userLimit, applicants) => {
     if (applicants?.length >= userLimit) {
       alert("User limit reached. Cannot join this request.");
@@ -214,6 +248,12 @@ const Home = () => {
     }
   };
 
+  /**
+   * Displays a list of applicants with their skills using alerts.
+   *
+   * @param {Array<Object>} applicants - An array of applicant objects, where each object has 'name' and 'skills' properties.
+   * @throws {Error} If the input is not an array or if it's an empty array.
+   */
   const viewApplicants = (applicants) => {
     if (!applicants || applicants.length === 0) {
       alert("No applicants yet.");

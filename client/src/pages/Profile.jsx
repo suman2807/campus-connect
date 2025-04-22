@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
+/**
+ * React component to display the user's profile.
+ * @returns {JSX.Element} - A JSX element representing the user's profile or a fallback message if not logged in.
+ */
 const profile = () => {
 
   const [user, setUser] = useState(null); // State to store the logged-in user

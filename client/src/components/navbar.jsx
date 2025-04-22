@@ -5,6 +5,12 @@ import logo from "../../public/srmaplogo.png";
 import { Link } from "react-router-dom";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
+/**
+ * React component representing the navigation bar at the top of the application.
+ *
+ * This component manages user authentication state, displays user-specific information,
+ * and provides options for sign-out and navigating to different pages.
+ */
 function Navbar() {
   const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,6 +28,15 @@ function Navbar() {
     return () => unsubscribe();
   }, []);
 
+  /**
+   * Handles user sign-out process.
+   *
+   * This function is responsible for signing out the currently authenticated user. It uses the `auth.signOut()` method to perform the sign-out operation and then sets the user state to null. If an error occurs during the sign-out process, it catches the exception and logs it to the console with a message indicating an error occurred during sign-out.
+   *
+   * @async
+   * @function handleSignOut
+   * @throws {Error} Throws an error if there is an issue during the sign-out process.
+   */
   const handleSignOut = async () => {
     try {
       await auth.signOut();

@@ -4,6 +4,11 @@ import { collection, addDoc, query, orderBy, onSnapshot } from "firebase/firesto
 import { db, auth } from "./firebase";
 import "./chats.css";
 
+/**
+ * Represents a chat component that handles messages, profanity checking, and user authentication.
+ *
+ * @returns {JSX.Element} - The JSX element representing the chat interface.
+ */
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -22,6 +27,19 @@ const Chat = () => {
     return () => unsubscribe();
   }, []);
   
+  /**
+   * Checks if the provided text contains profanity.
+   *
+   * @async
+   * @function checkProfanity
+   * @param {string} text - The text to be checked for profanity.
+   * @returns {Promise<boolean>} A promise that resolves with a boolean indicating whether the text is offensive (true) or not (false).
+   * @throws {Error} Throws an error if there's an issue with the HTTP request or response.
+   * @example
+   * checkProfanity("This is a test message.")
+   *   .then(result => console.log(result)) // Outputs: false
+   *   .catch(error => console.error(error));
+   */
   const checkProfanity = async (text) => {
     try {
       const response = await fetch("http://localhost:5000/api/proxy", {
@@ -47,6 +65,13 @@ const Chat = () => {
   
 
   // Send a message with profanity check
+  /**
+   * Sends a message to the server after checking for profanity.
+   * @async
+   * @function sendMessage
+   * @returns {void} - Does not return any value.
+   * @throws {Error} - Throws an error if there is an issue sending the message.
+   */
   const sendMessage = async () => {
     if (!newMessage.trim()) return;
 
@@ -73,6 +98,24 @@ const Chat = () => {
   };
 
   // Log flagged profanity messages
+  /**
+   * Logs a flagged message to the database.
+   *
+   * @async
+   * @function logProfanity
+   * @param {string} message - The message to be logged.
+   * @returns {Promise<void>} - A promise that resolves when the message is successfully logged, or rejects with an error if logging fails.
+   *
+   * @example
+   * try {
+   *   await logProfanity("This is a flagged message");
+   *   console.log("Message logged successfully.");
+   * } catch (error) {
+   *   console.error("Failed to log message:", error);
+   * }
+   *
+   * @throws {Error} - If an error occurs during the logging process.
+   */
   const logProfanity = async (message) => {
     try {
       console.log("Logging flagged message:", message); // Debugging
