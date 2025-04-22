@@ -1,5 +1,12 @@
 import { useState } from "react";
 
+/**
+ * A React component for creating sports requests.
+ *
+ * @param {Object} props - Component props.
+ * @param {Function} props.closeForm - Function to close the form.
+ * @returns {JSX.Element} - The rendered SportsForm component.
+ */
 const SportsForm = ({ closeForm }) => {
   const [formData, setFormData] = useState({
     title: "",
@@ -8,11 +15,21 @@ const SportsForm = ({ closeForm }) => {
     teamSize: "",
   });
 
+  /**
+   * Handles input change events by updating form data.
+   *
+   * @param {Event} e - The input event object.
+   */
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * Handles form submission by preventing default action, logging formData to console, and closing the form.
+   *
+   * @param {Event} e - The event object representing the form submission.
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     // Submit formData to Firebase
