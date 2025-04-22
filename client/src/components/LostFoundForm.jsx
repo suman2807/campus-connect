@@ -1,5 +1,11 @@
 import { useState } from "react";
 
+/**
+ * A functional component representing a form for submitting lost or found requests.
+ *
+ * @param {Object} props - The component's props.
+ * @param {function} props.closeForm - A function to close the form.
+ */
 const LostFoundForm = ({ closeForm }) => {
   const [formData, setFormData] = useState({
     title: "",
@@ -9,11 +15,27 @@ const LostFoundForm = ({ closeForm }) => {
     contactInfo: "",
   });
 
+  /**
+   * Handles input change events to update form data.
+   *
+   * @param {Event} e - The input change event object.
+   * @returns {void}
+   *
+   * @example
+   * // Usage within a React component's handleChange method
+   * handleInputChange(event);
+   */
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * Handles form submission by preventing the default action,
+   * logging formData to the console, and closing the form.
+   *
+   * @param {Event} e - The event object representing the submit event.
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     // Submit formData to Firebase
