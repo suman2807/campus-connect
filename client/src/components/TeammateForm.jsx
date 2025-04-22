@@ -1,5 +1,11 @@
 import { useState } from "react";
 
+/**
+ * A React component for creating teammate requests.
+ *
+ * @param {Object} props - The properties for the component.
+ * @param {Function} props.closeForm - A function to close the form.
+ */
 const TeammateForm = ({ closeForm }) => {
   const [formData, setFormData] = useState({
     title: "",
@@ -9,11 +15,22 @@ const TeammateForm = ({ closeForm }) => {
     additionalInfo: "",
   });
 
+  /**
+   * Handles input changes and updates form data state.
+   *
+   * @param {Event} e - The event object containing the target element's name and value.
+   */
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * Handles form submission.
+   *
+   * @param {Event} e - The event object from the form submission.
+   * @throws Will throw an error if the event is not a valid form submission event.
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     // Submit formData to Firebase
