@@ -3,10 +3,30 @@ import React, { useState, useEffect } from "react";
 import { db } from "../src/firebase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
+/**
+ * A React functional component to display deletion logs from Firestore.
+ *
+ * @returns {JSX.Element} The JSX element representing the Deletion Logs page.
+ */
 const Logs = () => {
   const [logs, setLogs] = useState([]);
 
   useEffect(() => {
+    /**
+     * Asynchronously fetches logs from a Firestore collection named "logs" and sorts them by the "deletedAt" field in descending order.
+     *
+     * @async
+     * @function fetchLogs
+     * @returns {Promise<void>} A promise that resolves when the logs have been fetched and set in the component's state. It does not return any value directly but updates the component state through the `setLogs` function.
+     * @throws {Error} If there is an error during the fetching of logs, it will be logged to the console with the message "Error fetching logs:" followed by the actual error.
+     *
+     * Example usage:
+     * ```javascript
+     * useEffect(() => {
+     *   fetchLogs();
+     * }, []);
+     * ```
+     */
     const fetchLogs = async () => {
       try {
         const q = query(collection(db, "logs"), orderBy("deletedAt", "desc"));
