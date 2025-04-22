@@ -1,5 +1,12 @@
 import { useState } from "react";
 
+/**
+ * A React component for creating a roommate request form.
+ *
+ * @param {Object} props - The component props.
+ * @param {Function} props.closeForm - A function to close the form modal.
+ * @returns {JSX.Element} - The rendered RoommateForm component.
+ */
 const RoommateForm = ({ closeForm }) => {
   const [formData, setFormData] = useState({
     title: "",
@@ -9,11 +16,26 @@ const RoommateForm = ({ closeForm }) => {
     contactInfo: "",
   });
 
+  /**
+   * Handles input change events by updating the form data.
+   *
+   * @param {Event} e - The input event object.
+   * @returns {void}
+   *
+   * Example:
+   *   <input type="text" name="username" onChange={handleInputChange} />
+   */
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * Handles form submission event.
+   *
+   * @param {Event} e - The form submit event object.
+   * @throws {Error} If the event is not a valid form submit event.
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     // Submit formData to Firebase
