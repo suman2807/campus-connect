@@ -3,11 +3,22 @@ import { db, auth } from "../firebase"; // Import Firebase config
 import { collection, addDoc } from "firebase/firestore"; // Firestore methods
 import { useAuthState } from "react-firebase-hooks/auth"; // For current user authentication state
 
+/**
+ * Represents the Feedback component that allows users to submit feedback about issues encountered and suggestions for improvements.
+ * This component utilizes React hooks such as useState and useAuthState to manage state and authentication status respectively.
+ */
 const Feedback = () => {
   const [issueFeedback, setIssueFeedback] = useState("");
   const [improvementFeedback, setImprovementFeedback] = useState("");
   const [user] = useAuthState(auth);
 
+  /**
+   * Handles the submission of feedback form. Validates user input and submits feedback to Firestore if all fields are filled.
+   *
+   * @async
+   * @function handleSubmit
+   * @returns {void}
+   */
   const handleSubmit = async () => {
     if (!user) {
       alert("Please log in to submit feedback.");
