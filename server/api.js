@@ -49,16 +49,35 @@ const Home = () => {
     fetchRequests();
   }, [user]);
 
+  /**
+   * Handles button click event by setting the selected request label and making the sidebar visible.
+   *
+   * @param {string} label - The label of the request that was clicked.
+   * @returns {void}
+   */
   const handleButtonClick = (label) => {
     setSelectedRequest(label);
     setSidebarVisible(true);
   };
 
+  /**
+   * Closes the sidebar and clears the selected request.
+   *
+   * @function
+   * @name closeSidebar
+   */
   const closeSidebar = () => {
     setSidebarVisible(false);
     setSelectedRequest("");
   };
 
+  /**
+   * Handles form submission for creating a new request.
+   *
+   * @async
+   * @function handleSubmitRequest
+   * @param {Event} e - The event object from the form submission.
+   */
   const handleSubmitRequest = async (e) => {
     e.preventDefault();
     const title = e.target.title.value;
@@ -87,6 +106,18 @@ const Home = () => {
     }
   };
 
+  /**
+   * Handles the application process for a selected request.
+   * This function prevents default form submission, checks if skills are provided,
+   * sends an application to the server, and handles success or failure alerts accordingly.
+   *
+   * @async
+   * @function handleApply
+   * @param {Event} e - The event object associated with the form submission.
+   * @returns {void}
+   *
+   * @throws {Error} If there is an error during the application process, it logs the error and shows a failure alert.
+   */
   const handleApply = async (e) => {
     e.preventDefault();
     if (!skills.trim()) {
@@ -110,6 +141,12 @@ const Home = () => {
     }
   };
 
+  /**
+   * Asynchronously fetches and displays applicants for a given request ID.
+   *
+   * @param {string} requestId - The unique identifier of the request.
+   * @throws {Error} If an error occurs during the fetching process.
+   */
   const viewApplicants = async (requestId) => {
     try {
       const { data } = await axios.get(`${API_URL}/requests/${requestId}/applicants`);
